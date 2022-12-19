@@ -15,8 +15,11 @@
 // IF not, Invalid Choice, Prompt the user again.
 // Return Valid Player Choice.
 
-let playerChoice = getPlayerChoice();
-console.log(playerChoice);
+let player = getPlayerChoice();
+let comp = getComputerChoice();
+
+console.log(`computer choice is ${comp}`);
+console.log(`player choice is ${player}`);
 
 function getPlayerChoice() 
 {
@@ -33,6 +36,25 @@ let first = choice.slice(0,1);
 let rest = choice.slice(1, (choice.length));
 let upper = first.toUpperCase();
 let answer = upper + rest;
-//console.log(`You chose ${answer}`);
+
 return answer;
+}
+
+/* This function defines an array of choices "Rock, Paper, Scissors"
+    and then calls getRandomNumber and uses that as the accessor to
+    the array for the computer choice. It returns the computerChoice */ 
+
+function getComputerChoice() {
+  let choices = [`Rock`, `Paper`, `Scissors`];
+  
+  const choicesNumber = getRandomNumber();
+  const compChoice = choices[choicesNumber];
+
+return compChoice;
+
+}
+/* This is a helper function to return a random number between 0 and 2 */
+
+function getRandomNumber() {
+  return Math.floor(Math.random() * 3);
 }
