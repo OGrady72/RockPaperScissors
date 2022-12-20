@@ -1,11 +1,45 @@
 
+game();
+// function game() 
+// Plays five rounds of PlayRound()
+// Keeps computer score and player score.
+// Reports Winner of each round.
+// Logs winner of the game
 
-let player = getPlayerChoice();
-let comp = getComputerChoice();
+function game() {
 
-console.log(player);
+  let compScore =0;
+  let playerScore =0;
 
-console.log(playRound(player, comp));
+  for(let i = 0; i < 5; i++) {
+    let player = getPlayerChoice();
+    let comp = getComputerChoice();
+
+    let gameString = playRound(player, comp);
+    
+    let regExPlayer = /You Win!/;
+    let regExComp = /You Lose!/;
+
+    if(regExPlayer.test(gameString)){
+      ++playerScore;
+    
+    } else if(regExComp.test(gameString)) {
+      ++compScore;
+    }
+    console.log(gameString);
+  }
+  if (playerScore > compScore) {
+    console.log(`You win the game ${playerScore} to ${compScore}!`);
+  }
+
+  else if (playerScore < compScore) {
+    console.log(`You lose the game ${compScore} to ${playerScore}!`);
+  
+  } else {
+    console.log(`It's a Tie! ${playerScore} to ${compScore}`);
+  }
+}
+
 
 // Get's the player choice and modifyies the string to "Rock, Paper, or Scissors" if the case 
 // does not match.
@@ -29,10 +63,10 @@ function getPlayerChoice() {
   let first = choice.slice(0,1);
   let rest = choice.slice(1, (choice.length));
   rest = rest.toLowerCase();
-  let upper = first.toUpperCase();
-  let answer = upper + rest;
+  first = first.toUpperCase();
+  choice = first + rest;
 
-  return answer;
+  return choice;
   }
 }
 
@@ -72,50 +106,50 @@ function playRound(playerChoice, computerChoice) {
         break;
 
       case `Scissors`: 
-      rpsString = `You Win! ${playerChoice} beats ${computerChoice}`
-      break;
+        rpsString = `You Win! ${playerChoice} beats ${computerChoice}`
+        break;
 
       default: 
-      rpsString = `Tie! ${playerChoice} ties ${computerChoice}`;
-      break;
+        rpsString = `Tie! ${playerChoice} ties ${computerChoice}`;
+        break;
     } 
 
     return rpsString;
   
   } else if(playerChoice == "Scissors") {
  
-    switch(computerChoice) {
+      switch(computerChoice) {
 
-      case `Paper`:
-        rpsString = `You Win! ${playerChoice} beats ${computerChoice}`;
-        break;
+        case `Paper`:
+          rpsString = `You Win! ${playerChoice} beats ${computerChoice}`;
+          break;
 
-      case `Rock`: 
-      rpsString = `You Lose! ${computerChoice} beats ${playerChoice}`;
-      break;
+        case `Rock`: 
+          rpsString = `You Lose! ${computerChoice} beats ${playerChoice}`;
+          break;
 
-      default: 
-      rpsString = `Tie! ${playerChoice} ties ${computerChoice}`;
-      break;
-    } 
+        default: 
+          rpsString = `Tie! ${playerChoice} ties ${computerChoice}`;
+          break;
+      } 
     return rpsString;
   
   } else {
 
-    switch(computerChoice) {
+      switch(computerChoice) {
 
-      case `Rock`:
-        rpsString = `You Win! ${playerChoice} beats ${computerChoice}`;
-        break;
+        case `Rock`:
+          rpsString = `You Win! ${playerChoice} beats ${computerChoice}`;
+          break;
 
-      case `Scissors`: 
-      rpsString = `You Lose! ${computerChoice} beats ${playerChoice}`;
-      break;
+        case `Scissors`: 
+          rpsString = `You Lose! ${computerChoice} beats ${playerChoice}`;
+          break;
 
-      default: 
-      rpsString = `Tie! ${playerChoice} ties ${computerChoice}`;
-      break;
-    } 
+        default: 
+          rpsString = `Tie! ${playerChoice} ties ${computerChoice}`;
+          break;
+      } 
     return rpsString;
       
     }
