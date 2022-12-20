@@ -1,8 +1,10 @@
 
 game();
+
+
 // function game() 
 // Plays five rounds of PlayRound()
-// Keeps computer score and player score.
+// Keeps computer score and player score using RegEx on the returned String.
 // Reports Winner of each round.
 // Logs winner of the game
 
@@ -29,14 +31,14 @@ function game() {
     console.log(gameString);
   }
   if (playerScore > compScore) {
-    console.log(`You win the game ${playerScore} to ${compScore}!`);
+    console.log(`GAME OVER: You win the game ${playerScore} to ${compScore}!`);
   }
 
   else if (playerScore < compScore) {
-    console.log(`You lose the game ${compScore} to ${playerScore}!`);
+    console.log(`GAME OVER: You lose the game ${compScore} to ${playerScore}!`);
   
   } else {
-    console.log(`It's a Tie! ${playerScore} to ${compScore}`);
+    console.log(` GAME OVER: It's a Tie! ${playerScore} to ${compScore}`);
   }
 }
 
@@ -54,16 +56,18 @@ function getPlayerChoice() {
   do {
     choice = prompt(`Which do you choose, "Paper, Scissors or Rock"?`);
       loop = regEx.test(choice);
+
+      if(!loop) {
+        console.log(`You entered an invalid choice ${choice}. Please Enter a valid choice:`);
+      }
   } while (loop == false);
 
   if (choice == `Rock` || choice == `Paper` || choice == `Scissors`) {
   return choice;
 
 } else {
-  let first = choice.slice(0,1);
-  let rest = choice.slice(1, (choice.length));
-  rest = rest.toLowerCase();
-  first = first.toUpperCase();
+  let first = choice.slice(0,1).toUpperCase();
+  let rest = choice.slice(1, choice.length).toLowerCase();
   choice = first + rest;
 
   return choice;
