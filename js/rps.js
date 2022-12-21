@@ -2,45 +2,7 @@
 game();
 
 
-// function game() 
-// Plays five rounds of PlayRound()
-// Keeps computer score and player score using RegEx on the returned String.
-// Reports Winner of each round.
-// Logs winner of the game
 
-function game() {
-
-  let compScore =0;
-  let playerScore =0;
-
-  for(let i = 0; i < 5; i++) {
-    let player = getPlayerChoice();
-    let comp = getComputerChoice();
-
-    let gameString = playRound(player, comp);
-    
-    let regExPlayer = /You Win!/;
-    let regExComp = /You Lose!/;
-
-    if(regExPlayer.test(gameString)){
-      ++playerScore;
-    
-    } else if(regExComp.test(gameString)) {
-      ++compScore;
-    }
-    console.log(gameString);
-  }
-  if (playerScore > compScore) {
-    console.log(`GAME OVER: You win the game ${playerScore} to ${compScore}!`);
-  }
-
-  else if (playerScore < compScore) {
-    console.log(`GAME OVER: You lose the game ${compScore} to ${playerScore}!`);
-  
-  } else {
-    console.log(` GAME OVER: It's a Tie! ${playerScore} to ${compScore}`);
-  }
-}
 
 
 // Get's the player choice and modifyies the string to "Rock, Paper, or Scissors" if the case 
@@ -158,4 +120,44 @@ function playRound(playerChoice, computerChoice) {
       
     }
   }
+
+  // function game() 
+// Plays five rounds of PlayRound()
+// Keeps computer score and player score using RegEx on the returned String.
+// Reports Winner of each round.
+// Logs winner of the game
+
+function game() {
+
+  let compScore =0;
+  let playerScore =0;
+
+  for(let i = 0; i < 5; i++) {
+    let player = getPlayerChoice();
+    let comp = getComputerChoice();
+
+    let gameString = playRound(player, comp);
+    
+    let regExPlayer = /You Win!/;
+    let regExComp = /You Lose!/;
+
+    if(regExPlayer.test(gameString)){
+      ++playerScore;
+    
+    } else if(regExComp.test(gameString)) {
+      ++compScore;
+    }
+    console.log(`Round ${i+1}:`,gameString);
+  }
+  if (playerScore > compScore) {
+    console.log(`GAME OVER: You win the game ${playerScore} to ${compScore}!`);
+  }
+
+  else if (playerScore < compScore) {
+    console.log(`GAME OVER: You lose the game ${compScore} to ${playerScore}!`);
+  
+  } else {
+    console.log(` GAME OVER: It's a Tie! ${playerScore} to ${compScore}`);
+  }
+}
  
