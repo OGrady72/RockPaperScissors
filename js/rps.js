@@ -1,58 +1,17 @@
-
-game();
-
-
-
-
-
-// Get's the player choice and modifyies the string to "Rock, Paper, or Scissors" if the case 
-// does not match.
-// Returns the string "Rock", "Paper", or "Scissors".
-
-function getPlayerChoice() {
-
-  let regEx = /(rock|paper|scissors)/i;
-  let loop = false;
-  let choice = "";
-
-  do {
-    choice = prompt(`Which do you choose, "Paper, Scissors or Rock"?`);
-      loop = regEx.test(choice);
-
-      if(!loop) {
-        console.log(`You entered an invalid choice ${choice}. Please Enter a valid choice:`);
-      }
-  } while (loop == false);
-
-  if (choice == `Rock` || choice == `Paper` || choice == `Scissors`) {
-  return choice;
-
-} else {
-  let first = choice.slice(0,1).toUpperCase();
-  let rest = choice.slice(1, choice.length).toLowerCase();
-  choice = first + rest;
-
-  return choice;
-  }
-}
-
-/* This function defines an array of choices "Rock, Paper, Scissors"
-    and then calls getRandomNumber and uses that as the accessor to
-    the array for the computer choice. It returns the computerChoice */ 
-
-function getComputerChoice() {
-  let choices = [`Rock`, `Paper`, `Scissors`];
-  
-  const choicesNumber = getRandomNumber();
-  const compChoice = choices[choicesNumber];
-
-return compChoice;
-
-}
 /* This is a helper function to return a random number between 0 and 2 */
 
 function getRandomNumber() {
-  return Math.floor(Math.random() * 3);
+    return Math.floor(Math.random() * 3);
+  }
+
+function getComputerChoice() {
+    let choices = [`Rock`, `Paper`, `Scissors`];
+    
+    const choicesNumber = getRandomNumber();
+    const compChoice = choices[choicesNumber];
+  
+  return compChoice;
+  
 }
 
 // This is the playRound() function. It has two parameters, the userchoice
@@ -61,103 +20,115 @@ function getRandomNumber() {
 
 function playRound(playerChoice, computerChoice) {
 
-  let rpsString ="";
-
-  if (playerChoice == "Rock") {
-
-    switch(computerChoice) {
-
-      case `Paper`:
-        rpsString = `You Lose! ${computerChoice} beats ${playerChoice}`;
-        break;
-
-      case `Scissors`: 
-        rpsString = `You Win! ${playerChoice} beats ${computerChoice}`
-        break;
-
-      default: 
-        rpsString = `Tie! ${playerChoice} ties ${computerChoice}`;
-        break;
-    } 
-
-    return rpsString;
+    let rpsString ="";
   
-  } else if(playerChoice == "Scissors") {
- 
+    if (playerChoice == "Rock") {
+  
       switch(computerChoice) {
-
+  
         case `Paper`:
-          rpsString = `You Win! ${playerChoice} beats ${computerChoice}`;
-          break;
-
-        case `Rock`: 
           rpsString = `You Lose! ${computerChoice} beats ${playerChoice}`;
           break;
-
-        default: 
-          rpsString = `Tie! ${playerChoice} ties ${computerChoice}`;
-          break;
-      } 
-    return rpsString;
   
-  } else {
-
-      switch(computerChoice) {
-
-        case `Rock`:
-          rpsString = `You Win! ${playerChoice} beats ${computerChoice}`;
-          break;
-
         case `Scissors`: 
-          rpsString = `You Lose! ${computerChoice} beats ${playerChoice}`;
+          rpsString = `You Win! ${playerChoice} beats ${computerChoice}`
           break;
-
+  
         default: 
           rpsString = `Tie! ${playerChoice} ties ${computerChoice}`;
           break;
       } 
-    return rpsString;
-      
-    }
-  }
-
-  // function game() 
-// Plays five rounds of PlayRound()
-// Keeps computer score and player score using RegEx on the returned String.
-// Reports Winner of each round.
-// Logs winner of the game
-
-function game() {
-
-  let compScore =0;
-  let playerScore =0;
-
-  for(let i = 0; i < 5; i++) {
-    let player = getPlayerChoice();
-    let comp = getComputerChoice();
-
-    let gameString = playRound(player, comp);
+  
+      return rpsString;
     
+    } else if(playerChoice == "Scissors") {
+   
+        switch(computerChoice) {
+  
+          case `Paper`:
+            rpsString = `You Win! ${playerChoice} beats ${computerChoice}`;
+            break;
+  
+          case `Rock`: 
+            rpsString = `You Lose! ${computerChoice} beats ${playerChoice}`;
+            break;
+  
+          default: 
+            rpsString = `Tie! ${playerChoice} ties ${computerChoice}`;
+            break;
+        } 
+      return rpsString;
+    
+    } else {
+  
+        switch(computerChoice) {
+  
+          case `Rock`:
+            rpsString = `You Win! ${playerChoice} beats ${computerChoice}`;
+            break;
+  
+          case `Scissors`: 
+            rpsString = `You Lose! ${computerChoice} beats ${playerChoice}`;
+            break;
+  
+          default: 
+            rpsString = `Tie! ${playerChoice} ties ${computerChoice}`;
+            break;
+        } 
+      return rpsString;
+        
+      }
+    }
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((btn) => {
+    btn.addEventListener('click', selectChoice);
+});
+
+let compScore = 0;
+let playerScore = 0;
+
+function selectChoice(e) {
+    
+   
+
+    let userChoice = e.target.id;
+    let computerChoice = getComputerChoice();
+    
+    let docString = playRound(userChoice, computerChoice);
+
     let regExPlayer = /You Win!/;
     let regExComp = /You Lose!/;
 
-    if(regExPlayer.test(gameString)){
+    if(regExPlayer.test(docString)){
       ++playerScore;
     
-    } else if(regExComp.test(gameString)) {
-      ++compScore;
+    } else if(regExComp.test(docString)) {
+        ++compScore;
     }
-    console.log(`Round ${i+1}:`,gameString);
-  }
-  if (playerScore > compScore) {
-    console.log(`GAME OVER: You win the game ${playerScore} to ${compScore}!`);
-  }
 
-  else if (playerScore < compScore) {
-    console.log(`GAME OVER: You lose the game ${compScore} to ${playerScore}!`);
-  
-  } else {
-    console.log(` GAME OVER: It's a Tie! ${playerScore} to ${compScore}`);
-  }
-}
+    if (playerScore <5 && compScore <5) {
+
+    let result = document.querySelector('.results');
+    result.textContent = `${docString} | User: ${playerScore} Computer: ${compScore}`;
+    }
+
+    else {
+      let result = document.querySelector('.results');
+      if ( playerScore > compScore) {
+        result.textContent =`Game Over: You Win! ${playerScore} to ${compScore}`;
+      
+      } else {
+          result.textContent = `Game Over: You Lose! ${playerScore} to ${compScore}`;
+      }
+    playerScore =0;
+    compScore =0;
+    }
  
+}
+  
+
+
+
+
