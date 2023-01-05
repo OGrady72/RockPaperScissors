@@ -1,5 +1,5 @@
 body {
-    background-image: url('/background/RPS.jpg');
+    
     background-repeat: no-repeat;
     background-position: center;
 
@@ -10,7 +10,10 @@ body {
     justify-content: center;
     align-items: flex-start;
     gap: 10px;
-    height: 600px;
+    margin: 20px;
+}
+img {
+    margin-left: 292px;
 }
 
 button {
