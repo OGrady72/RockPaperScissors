@@ -20,10 +20,8 @@ p {
     padding: 20px;
 }
 .image {
-    display: flex;
-    justify-content: center;
-    width: 800px;
-    margin-left: 15px;
+    display:flex;
+    justify-content:center;
 }
 .container {
     display:flex;
@@ -33,9 +31,7 @@ p {
     gap: 10px;
     margin: 20px;
 }
-img {
-    margin-left: 292px;
-}
+
 
 button {
     width: 175px;
@@ -50,5 +46,6 @@ button {
     font-weight: bold;
     display: flex;
     justify-content: center;
+    padding:20px;
 
 }
