@@ -86,19 +86,49 @@ buttons.forEach((btn) => {
     btn.addEventListener('click', selectChoice);
 });
 
+let compScore = 0;
+let playerScore = 0;
+
 function selectChoice(e) {
     
-    let compScore = 0;
-    let userScore = 0;
+   
 
     let userChoice = e.target.id;
     let computerChoice = getComputerChoice();
     
     let docString = playRound(userChoice, computerChoice);
 
+    let regExPlayer = /You Win!/;
+    let regExComp = /You Lose!/;
+
+    if(regExPlayer.test(docString)){
+      ++playerScore;
+    
+    } else if(regExComp.test(docString)) {
+        ++compScore;
+    }
+
+    if (playerScore <5 && compScore <5) {
+
     let result = document.querySelector('.results');
-    result.textContent = `${docString} | User: ${userScore} Computer: ${compScore}`;
+    result.textContent = `${docString} | User: ${playerScore} Computer: ${compScore}`;
+    }
+
+    else {
+      let result = document.querySelector('.results');
+      if ( playerScore > compScore) {
+        result.textContent =`Game Over: You Win! ${playerScore} to ${compScore}`;
+      
+      } else {
+          result.textContent = `Game Over: You Lose! ${playerScore} to ${compScore}`;
+      }
+    playerScore =0;
+    compScore =0;
+    }
+ 
 }
+  
+
 
 
 
